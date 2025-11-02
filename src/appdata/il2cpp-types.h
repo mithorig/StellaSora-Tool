@@ -3586,6 +3586,23 @@ enum class DamageType__Enum : int32_t {
     Area = 0x00000005,
 };
 
+enum class AimType__Enum : int32_t {
+    Default = 0x00000000,
+    Forward = 0x00000001,
+    Position = 0x00000002,
+    Target = 0x00000003,
+};
+
+enum class BulletFinishReason__Enum : int32_t {
+    Timeout = 0x00000000,
+    HitActor = 0x00000001,
+    HitObstacle = 0x00000002,
+    HitDestructibleObstacle = 0x00000003,
+    HitShield = 0x00000004,
+    ByFeature = 0x00000005,
+    Kill = 0x00000006,
+};
+
 enum class ButtonState__Enum : uint8_t {
     None = 0x00,
     Press = 0x01,
@@ -5481,6 +5498,109 @@ struct AdventureWeapon {
     struct AdventureWeapon__Class *klass;
     MonitorData *monitor;
     struct AdventureWeapon__Fields fields;
+};
+
+struct AdventureBulletBase__Fields {
+    struct AdventureWeapon__Fields _;
+    struct FP damageArea;
+    struct GameObject *finishPrefab;
+    bool isPlayFinishPrefab;
+    struct LogicEntity *_target;
+    struct TSVector2 _targetPosition_k__BackingField;
+    struct FP _targetPositionY_k__BackingField;
+    #if defined(_CPLUSPLUS_)
+    AimType__Enum _aimType;
+    #else
+    int32_t _aimType;
+    #endif
+    int64_t tagUid;
+    #if defined(_CPLUSPLUS_)
+    BulletFinishReason__Enum _finishReason;
+    #else
+    int32_t _finishReason;
+    #endif
+    struct FP damageImmuneDurationForMonsterWeapon;
+    bool _isFinished_k__BackingField;
+    struct List_1_WeaponFeature_ *_features_k__BackingField;
+    struct FP _delayShoot_k__BackingField;
+    struct FP _delayShootTimer;
+};
+
+struct AdventureBulletBase__VTable {
+    VirtualInvokeData Equals;
+    VirtualInvokeData Finalize;
+    VirtualInvokeData GetHashCode;
+    VirtualInvokeData ToString;
+    VirtualInvokeData get_Id;
+    VirtualInvokeData get_ActiveSelf;
+    VirtualInvokeData AddLogicComponent;
+    VirtualInvokeData GetLogicComponent;
+    VirtualInvokeData GetLogicComponent_1;
+    VirtualInvokeData AddOrGetLogicComponent;
+    VirtualInvokeData AddMonoLogicComponent;
+    VirtualInvokeData AddOrGetMonoLogicComponent;
+    VirtualInvokeData IsCoroutineAlive;
+    VirtualInvokeData IsCoroutineRunning;
+    VirtualInvokeData GetCoroutineDeltaTime;
+    VirtualInvokeData OnActive;
+    VirtualInvokeData OnDeactive;
+    VirtualInvokeData OnInit;
+    VirtualInvokeData OnShutdown;
+    VirtualInvokeData OnLogicUpdateEnabled;
+    VirtualInvokeData OnLogicUpdateDisabled;
+    VirtualInvokeData OnLogicUpdatePaused;
+    VirtualInvokeData OnLogicUpdateResumed;
+    VirtualInvokeData OnLogicStart;
+    VirtualInvokeData OnLogicUpdate;
+    VirtualInvokeData OnLogicTimeScaleChanged;
+    VirtualInvokeData OnVisualUpdate;
+    VirtualInvokeData QueryHitBoxContextTime;
+    VirtualInvokeData QueryHitBoxContextPosition;
+    VirtualInvokeData QueryHitBoxContextDirection;
+    VirtualInvokeData QueryActorHitedTimeout;
+    VirtualInvokeData SetActorHitedTime;
+    VirtualInvokeData CheckHitable;
+    VirtualInvokeData OnHitActor;
+    VirtualInvokeData OnHitShield;
+    VirtualInvokeData OnHitObstacle;
+    VirtualInvokeData OnHitDestructibleObstacle;
+    VirtualInvokeData get_isValid;
+    VirtualInvokeData Setup;
+    VirtualInvokeData Reset;
+    VirtualInvokeData Finish;
+    VirtualInvokeData CheckHitable_1;
+    VirtualInvokeData OnHitActor_1;
+    VirtualInvokeData OnHitShield_1;
+    VirtualInvokeData OnHitObstacle_1;
+    VirtualInvokeData OnHitDestructibleObstacle_1;
+    VirtualInvokeData get_isShootableWeapon;
+    VirtualInvokeData get_isEquipableWeapon;
+    VirtualInvokeData OnEquipWith;
+    VirtualInvokeData OnEquipUpdate;
+    VirtualInvokeData OnEquipDrop;
+    VirtualInvokeData get_isShield;
+    VirtualInvokeData get_isShowShadowBlob;
+    VirtualInvokeData iShowShadowBlob;
+    VirtualInvokeData ModifyWeaponScaleByMulti;
+    VirtualInvokeData OnWeaponScaleChange;
+};
+
+struct AdventureBulletBase__StaticFields {
+};
+
+struct AdventureBulletBase__Class {
+    Il2CppClass_0 _0;
+    Il2CppRuntimeInterfaceOffsetPair *interfaceOffsets;
+    struct AdventureBulletBase__StaticFields *static_fields;
+    const Il2CppRGCTXData *rgctx_data;
+    Il2CppClass_1 _1;
+    struct AdventureBulletBase__VTable vtable;
+};
+
+struct AdventureBulletBase {
+    struct AdventureBulletBase__Class *klass;
+    MonitorData *monitor;
+    struct AdventureBulletBase__Fields fields;
 };
 
 struct Action_1_Boolean___Fields {

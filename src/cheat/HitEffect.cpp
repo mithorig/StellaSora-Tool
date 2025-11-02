@@ -42,7 +42,7 @@ namespace cheat::feature
 		ImGui::SliderInt("##MultiHit", &f_MultiHitMultiplier, 2, 50, "%d", ImGuiInputTextFlags_EnterReturnsTrue);
 	}
 
-	bool isPlayer(app::LogicEntity* actor) {
+	static bool isPlayer(app::LogicEntity* actor) {
 		auto adventurePlayerController = GET_SINGLETON(AdventurePlayerController);
 		if (adventurePlayerController == nullptr)
 			return false;
@@ -128,6 +128,7 @@ namespace cheat::feature
 				CALL_ORIGIN(AdventureWeapon_OnHitActor_Hook, __this, hitBox, uniqueAttackId, onceAttackTargetCount, actor, raycastHit, damaged, hurtEffectPrefab, isHittedEffectScale, effectIgnoreTimeScale, method);
 			}
 
+			*damaged = true;
 			return true;
 		}
 		return CALL_ORIGIN(AdventureWeapon_OnHitActor_Hook, __this, hitBox, uniqueAttackId, onceAttackTargetCount, actor, raycastHit, damaged, hurtEffectPrefab, isHittedEffectScale, effectIgnoreTimeScale, method);
