@@ -208,6 +208,7 @@
     <ClCompile Include="src\cheat\misc\About.cpp" />
     <ClCompile Include="src\cheat\MobVacuum.cpp" />
     <ClCompile Include="src\cheat\NoCD.cpp" />
+    <ClCompile Include="src\cheat\GameSpeed.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">
