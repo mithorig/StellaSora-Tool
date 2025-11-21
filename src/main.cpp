@@ -11,6 +11,7 @@
 #include "cheat/InstantBreak.h"
 #include "cheat/MobVacuum.h"
 #include "cheat/StatModifier.h"
+#include "cheat/GameSpeed.h"
 
 #include "cheat/misc/About.h"
 
@@ -57,6 +58,8 @@ void Run(HMODULE* phModule) {
 		ADD_FEATURE(NoCD),
 		ADD_FEATURE(MobVacuum),
 		ADD_FEATURE(StatModifier),
+// Регистрируем GameSpeed
+        ADD_FEATURE(GameSpeed),
 		ADD_FEATURE(About)
 	});
 	#undef ADD_FEATURE
