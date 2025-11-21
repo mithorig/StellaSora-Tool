@@ -2,9 +2,9 @@ name: Build Cheat DLL
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -19,10 +19,9 @@ jobs:
 
     - name: Build Solution
       run: msbuild StellaSora-Tool.sln /p:Configuration=Release /p:Platform=x64
-      # ВАЖНО: Замените YourSolutionName.sln на имя вашего файла решения (.sln)
 
-     - name: Upload Artifact
+    - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: CheatDLL
-        path: bin/Release-x64/*.dll   # <--- ВОТ ЗДЕСЬ БЫЛА ОШИБКА
+        path: bin/Release-x64/*.dll
