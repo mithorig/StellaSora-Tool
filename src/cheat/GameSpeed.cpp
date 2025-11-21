@@ -1,21 +1,24 @@
 #include <pch.h>
 #include "GameSpeed.h"
-#include <src/main.h> // Нужно для доступа к global::AdventureModuleController_Update
-#include <appdata/helpers.h> // Для конвертации float -> FP
+#include <src/main.h> 
+#include <appdata/helpers.h>
 
 namespace cheat::feature
 {
+    // Статическая функция-обертка для обновления
+    // Она нужна, потому что std::list ожидает обычный указатель на функцию
+    static void GameSpeed_OnUpdate_Wrapper() {
+        GameSpeed::GetInstance().OnUpdate();
+    }
+
     GameSpeed& GameSpeed::GetInstance() {
         static GameSpeed instance;
         return instance;
     }
 
     GameSpeed::GameSpeed() : Feature() {
-        // Сеньорский мув: подписываемся на существующий апдейт-луп, 
-        // чтобы применять скорость каждый кадр без лишних хуков.
-        global::AdventureModuleController_Update.push_back([this]() {
-            this->OnUpdate();
-        });
+        // Теперь передаем адрес статической функции, а не лямбду
+        global::AdventureModuleController_Update.push_back(&GameSpeed_OnUpdate_Wrapper);
     }
 
     const FeatureGUIInfo& GameSpeed::GetGUIInfo() const {
@@ -26,19 +29,14 @@ namespace cheat::feature
     void GameSpeed::DrawMain() {
         ImGui::Text("Select Speed:");
         
-        // Радио-кнопки для быстрого переключения
-        if (ImGui::RadioButton("1.0x (Normal)", &m_SpeedMode, 0)) {
-            // Можно добавить логику при переключении, если нужно
-        }
+        if (ImGui::RadioButton("1.0x (Normal)", &m_SpeedMode, 0)) {}
         ImGui::SameLine();
         if (ImGui::RadioButton("2.0x", &m_SpeedMode, 1)) {}
         ImGui::SameLine();
         if (ImGui::RadioButton("5.0x", &m_SpeedMode, 2)) {}
         
-        // Опция своей скорости
         if (ImGui::RadioButton("Custom", &m_SpeedMode, 3)) {}
 
-        // Если выбран кастомный режим, показываем слайдер
         if (m_SpeedMode == 3) {
             ImGui::SliderFloat("##speed_slider", &m_CustomSpeed, 0.1f, 20.0f, "Speed: %.1f");
         }
@@ -54,14 +52,10 @@ namespace cheat::feature
             case 3: targetSpeed = m_CustomSpeed; break;
         }
 
-        // Если скорость 1.0x (норма), можно ничего не делать, чтобы не ломать катсцены,
-        // но лучше принудительно ставить 1.0, чтобы сбросить ускорение.
-        
-        // Конвертируем float в FixedPoint (FP), который использует игра
-        // app::FP_op_Implicit_1 обычно конвертирует float -> FP. Проверь helpers.h если имя отличается.
-        auto speedFP = app::FP_op_Implicit_1(targetSpeed, nullptr);
+        // Используем нашу новую функцию конвертации (Float -> FP)
+        auto speedFP = app::FP_op_Implicit_Float(targetSpeed, nullptr);
 
-        // Применяем скорость
+        // Устанавливаем скорость через LockStepManager
         app::LockStepManager_set_globalTimeScale(speedFP, nullptr);
     }
 }
