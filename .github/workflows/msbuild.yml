@@ -21,7 +21,7 @@ jobs:
       run: msbuild StellaSora-Tool.sln /p:Configuration=Release /p:Platform=x64
       # ВАЖНО: Замените YourSolutionName.sln на имя вашего файла решения (.sln)
 
-      - name: Upload Artifact
+     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: CheatDLL
