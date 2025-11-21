@@ -18,7 +18,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build Solution
-      run: msbuild YourSolutionName.sln /p:Configuration=Release /p:Platform=x64
+      run: msbuild StellaSora-Tool.sln /p:Configuration=Release /p:Platform=x64
       # ВАЖНО: Замените YourSolutionName.sln на имя вашего файла решения (.sln)
 
     - name: Upload Artifact
