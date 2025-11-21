@@ -1,0 +1,29 @@
+name: Build Cheat DLL
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build Solution
+      run: msbuild YourSolutionName.sln /p:Configuration=Release /p:Platform=x64
+      # ВАЖНО: Замените YourSolutionName.sln на имя вашего файла решения (.sln)
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: CheatDLL
+        path: x64/Release/*.dll 
+        # Путь может отличаться в зависимости от настроек VS (например, bin/Release/...)
