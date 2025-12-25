@@ -183,7 +183,6 @@
     <ClInclude Include="src\cheat\MobVacuum.h" />
     <ClInclude Include="src\Feature.h" />
     <ClInclude Include="src\cheat\NoCD.h" />
-    <ClInclude Include="src\cheat\GameSpeed.h" />
     <ClInclude Include="src\framework.h" />
     <ClInclude Include="src\main.h" />
     <ClInclude Include="src\pch.h" />
@@ -209,7 +208,6 @@
     <ClCompile Include="src\cheat\misc\About.cpp" />
     <ClCompile Include="src\cheat\MobVacuum.cpp" />
     <ClCompile Include="src\cheat\NoCD.cpp" />
-    <ClCompile Include="src\cheat\GameSpeed.cpp" />
     <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\pch.cpp">

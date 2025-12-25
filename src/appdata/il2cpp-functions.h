@@ -54,13 +54,3 @@ DO_APP_FUNC(0x052349C0, iFP, iFP_op_Implicit, (FP val, MethodInfo* method));
 DO_APP_FUNC(0x00014830, void*, Singleton_GetInstance, (MethodInfo* method));
 DO_APP_FUNC_METHODINFO(0x06F95020, Singleton_1_AdventureModuleController__get_Instance__MethodInfo);
 DO_APP_FUNC_METHODINFO(0x06F89A30, Singleton_1_AdventurePlayerController__get_Instance__MethodInfo);
-
-
-// --- Добавить это в конец src/appdata/il2cpp-functions.h ---
-
-// Game Speed (LockStepManager)
-// Адрес взят из dump.cs (0x51fff30)
-DO_APP_FUNC(0x051FFF30, void, LockStepManager_set_globalTimeScale, (FP value, MethodInfo* method));
-
-// Конвертация float в FP (адрес 0x51ff170 из dump.cs)
-DO_APP_FUNC(0x051FF170, FP, FP_op_Implicit_Float, (float value, MethodInfo* method));
