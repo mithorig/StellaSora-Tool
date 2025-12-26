@@ -71,12 +71,7 @@ bool IsStaticCheckSumValid()
 // IL2CPP application initializer
 void init_il2cpp()
 {
-	if (!IsStaticCheckSumValid())
-	{
-		MessageBox(NULL, "Version mismatch.", "StellaSora-Tool", MB_OK | MB_SYSTEMMODAL);
-		ExitProcess(0);
-		return;
-	}
+
 
 	// Get base address of IL2CPP module
 	uintptr_t baseAddress = il2cppi_get_base_address();
